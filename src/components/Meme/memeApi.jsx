@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './memeFeedStyle.scss';
 
-const API_KEY = 'z7xePyKdvtnZcCVdpDqhPtKpLhgUZXaT';
-
-export default function MemeFeed() {
+const MemeFeed = () =>{
     const [memes, setMemes] = useState([]);
+    const API_KEY = import.meta.env.VITE_API_KEY;
 
     useEffect(() => {
         const fetchMemes = async () => {
@@ -32,3 +31,5 @@ export default function MemeFeed() {
         </div>
     );
 }
+
+export default MemeFeed;
