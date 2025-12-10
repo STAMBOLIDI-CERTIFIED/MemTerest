@@ -1,6 +1,13 @@
-# React + Vite
+## Требования
+- Node.js **20.18.3**
 
-Node - v24.11.0
 
-Команда для установки Vite
-npm create vite@latest
+## Устанавливаем зависимости
+```js
+npm ci
+```
+
+## Команда для запуска dev сервера
+```js
+npm run dev
+```
