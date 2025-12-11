@@ -10,7 +10,7 @@ const MemeFeed = () =>{
 
     useEffect(() => {
         const fetchMemes = async () => {
-            const offset = Math.floor(Math.random() * 3000); // случайная позиция
+            const offset = Math.floor(Math.random() * 3000);
             const res = await axios.get(
                 `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=funny&limit=${limit}&offset=${offset}&rating=g`
             );
