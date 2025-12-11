@@ -4,31 +4,39 @@ import './memeFeedStyle.scss';
 
 const MemeFeed = () =>{
     const [memes, setMemes] = useState([]);
+    const limit = 100;
     const API_KEY = import.meta.env.VITE_API_KEY;
+    const promises = [];
 
     useEffect(() => {
         const fetchMemes = async () => {
-            try {
-                const res = await axios.get(
-                    `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=10000&rating=g`
-                );
-                setMemes(res.data.data);
-            } catch (err) {
-                console.error('Ошибка при получении мемов:', err);
-            }
+            const offset = Math.floor(Math.random() * 3000); // случайная позиция
+            const res = await axios.get(
+                `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=funny&limit=${limit}&offset=${offset}&rating=g`
+            );
+            setMemes(res.data.data);
         };
+
 
         fetchMemes();
     }, []);
+
+    console.log(memes.length);
 
     return (
         <div className="meme-feed">
             {memes.map((meme) => (
                 <div key={meme.id} className="meme-card">
-                    <img src={meme.images.fixed_height.url} alt={meme.title} />
+                    <img src={
+                        meme.images?.fixed_height?.url ||
+                        meme.images?.downsized?.url ||
+                        meme.images?.original?.url
+                    } alt={meme.title} />
                 </div>
             ))}
         </div>
+
+
     );
 }
 
