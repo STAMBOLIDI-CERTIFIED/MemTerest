@@ -1,4 +1,26 @@
 .nav{
   height: 50px;
-  background-color: black;
+  padding-inline: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.nav__list ul{
+  display: flex;
+  gap: 40px;
+  list-style: none;
+
+  li a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+  }
+}
+
+.nav__buttonReload{
+  width: 140px;
+  height: 40px;
+  font-size: 20px;
 }

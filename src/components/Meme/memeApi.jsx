@@ -1,43 +1,70 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Pagination from '../Pagination/pagination.jsx';
 import './memeFeedStyle.scss';
 
-const MemeFeed = () =>{
-    const [memes, setMemes] = useState([]);
-    const limit = 100;
-    const API_KEY = import.meta.env.VITE_API_KEY;
-    const promises = [];
+const LIMIT = 20;
 
-    useEffect(() => {
-        const fetchMemes = async () => {
-            const offset = Math.floor(Math.random() * 3000);
-            const res = await axios.get(
-                `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=funny&limit=${limit}&offset=${offset}&rating=g`
-            );
-            setMemes(res.data.data);
-        };
+const MemeFeed = () => {
+	const [memes, setMemes] = useState([]);
+	const [page, setPage] = useState(0);
+	const [loading, setLoading] = useState(false);
 
+	const API_KEY = import.meta.env.VITE_API_KEY;
 
-        fetchMemes();
-    }, []);
+	useEffect(() => {
+		const fetchMemes = async () => {
+			try {
+				setLoading(true);
 
-    console.log(memes.length);
+				const offset = page * LIMIT;
 
-    return (
-        <div className="meme-feed">
-            {memes.map((meme) => (
-                <div key={meme.id} className="meme-card">
-                    <img src={
-                        meme.images?.fixed_height?.url ||
-                        meme.images?.downsized?.url ||
-                        meme.images?.original?.url
-                    } alt={meme.title} />
-                </div>
-            ))}
-        </div>
+				const res = await axios.get(
+					`https://api.giphy.com/v1/gifs/search`,
+					{
+						params: {
+							api_key: API_KEY,
+							q: 'funny',
+							limit: LIMIT,
+							offset,
+							rating: 'g',
+						},
+					}
+				);
 
+				setMemes(res.data.data);
+			} catch (e) {
+				console.error(e);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-    );
-}
+		fetchMemes();
+	}, [page, API_KEY]);
+
+	return (
+		<>
+			<div className='meme-feed'>
+				{loading && <p>Loading...</p>}
+
+				{memes.map((meme) => (
+					<div key={meme.id} className='meme-card'>
+						<img
+							src={
+								meme.images?.fixed_height?.url ||
+								meme.images?.downsized?.url ||
+								meme.images?.original?.url
+							}
+							alt={meme.title}
+						/>
+					</div>
+				))}
+			</div>
+
+			<Pagination page={page} setPage={setPage} />
+		</>
+	);
+};
 
 export default MemeFeed;
