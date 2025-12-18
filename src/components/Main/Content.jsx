@@ -1,13 +1,13 @@
 import MemeFeed from '../Meme/memeApi';
 
-const Content = () => {
+const Content = ({ reload }) => {
 	return (
 		<>
 			<main className={'main'}>
 				<div className={'main__wrapper'}>
 					<div className={'content'}>
-						<h2>Trending Memes</h2>
-						<MemeFeed />
+						<h2>Лента мемов</h2>
+						<MemeFeed reload={reload} />
 					</div>
 				</div>
 			</main>

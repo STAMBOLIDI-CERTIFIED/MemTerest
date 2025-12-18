@@ -3,16 +3,24 @@ import './paginationStyle.scss';
 const Pagination = ({ page, setPage }) => {
 	return (
 		<div className='pagination'>
-			<button
-				onClick={() => setPage((p) => Math.max(p - 1, 0))}
-				disabled={page === 0}
-			>
-				← Предыдущая
-			</button>
+			<div className='pagination__wrapper'>
+				<button
+					className='pagination__button'
+					onClick={() => setPage((p) => Math.max(p - 1, 0))}
+					disabled={page === 0}
+				>
+					← Предыдущая
+				</button>
 
-			<span>Страница {page + 1}</span>
+				<span className='pagination__title'>Страница {page + 1}</span>
 
-			<button onClick={() => setPage((p) => p + 1)}>Следующая →</button>
+				<button
+					onClick={() => setPage((p) => p + 1)}
+					className='pagination__button'
+				>
+					Следующая →
+				</button>
+			</div>
 		</div>
 	);
 };

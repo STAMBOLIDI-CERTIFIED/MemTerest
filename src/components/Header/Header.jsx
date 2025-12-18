@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const Header = () => {
+const Header = ({ onReload }) => {
 	return (
 		<>
 			<nav className='nav'>
@@ -23,11 +23,8 @@ const Header = () => {
 				</div>
 
 				<div>
-					<button
-						className='nav__buttonReload'
-						onClick={() => window.location.reload()}
-					>
-						Обновить
+					<button className='nav__buttonReload' onClick={onReload}>
+						Обновить мемы
 					</button>
 				</div>
 			</nav>
