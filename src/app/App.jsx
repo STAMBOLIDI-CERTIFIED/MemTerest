@@ -1,6 +1,8 @@
+import { Routes, Route } from 'react-router-dom';
 import './AppStyle.scss';
-import { useState } from 'react';
 import HomePage from '../pages/Home/HomePage.jsx';
+import AboutPage from '../pages/about/AboutPage.jsx';
+import Content from '../widgets/Content/ui/Content.jsx';
 
 const App = () => {
 	return (

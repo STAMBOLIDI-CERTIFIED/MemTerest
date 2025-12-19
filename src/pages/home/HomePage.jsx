@@ -1,5 +1,5 @@
 import Header from '../../widgets/Header/ui/Header.jsx';
-import Content from '../../widgets/Main/ui/Content.jsx';
+import Content from '../../widgets/Content/ui/Content.jsx';
 import { useState } from 'react';
 
 const HomePage = () => {
