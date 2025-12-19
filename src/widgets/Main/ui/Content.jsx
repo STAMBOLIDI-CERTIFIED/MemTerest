@@ -1,4 +1,4 @@
-import MemeFeed from '../Meme/memeApi';
+import MemeFeed from '../../Meme/ui/memeApi.jsx';
 
 const Content = ({ reload }) => {
 	return (

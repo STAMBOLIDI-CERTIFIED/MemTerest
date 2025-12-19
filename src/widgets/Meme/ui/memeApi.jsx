@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Pagination from '../Pagination/pagination.jsx';
+import Pagination from '../../Pagination/ui/pagination.jsx';
 import './memeFeedStyle.scss';
 
 const LIMIT = 5;
@@ -74,7 +74,7 @@ const MemeFeed = ({ reload }) => {
 			{selectedMeme && (
 				<div
 					className='meme-modal'
-					onClick={() => setSelectedMeme(null)} // закрытие по клику на фон
+					onClick={() => setSelectedMeme(null)}
 				>
 					<div
 						className='meme-modal__content'
