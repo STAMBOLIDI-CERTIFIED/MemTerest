@@ -3,9 +3,9 @@ import axios from 'axios';
 import Pagination from '../../Pagination/ui/pagination.jsx';
 import './memeFeedStyle.scss';
 
-const LIMIT = 5;
+const LIMIT = 10;
 
-const MemeFeed = ({ reload }) => {
+const MemeFeed = ({ reload, apiMeme }) => {
 	const [memes, setMemes] = useState([]);
 	const [page, setPage] = useState(0);
 	const [loading, setLoading] = useState(false);
@@ -21,17 +21,14 @@ const MemeFeed = ({ reload }) => {
 
 				const offset = page * LIMIT;
 
-				const res = await axios.get(
-					'https://api.giphy.com/v1/gifs/trending',
-					{
-						params: {
-							api_key: API_KEY,
-							limit: LIMIT,
-							offset,
-							rating: 'g',
-						},
-					}
-				);
+				const res = await axios.get(apiMeme, {
+					params: {
+						api_key: API_KEY,
+						limit: LIMIT,
+						offset,
+						rating: 'g',
+					},
+				});
 
 				setMemes(res.data.data);
 				setTotalCount(res.data.pagination.total_count);
@@ -43,7 +40,11 @@ const MemeFeed = ({ reload }) => {
 		};
 
 		fetchMemes();
-	}, [page, reload, API_KEY]);
+	}, [page, reload, apiMeme, API_KEY]);
+
+	useEffect(() => {
+		setPage(0);
+	}, [apiMeme]);
 
 	const totalPages = Math.ceil(totalCount / LIMIT);
 
